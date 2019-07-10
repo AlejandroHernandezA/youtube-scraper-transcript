@@ -4,12 +4,15 @@ provider:
   name: aws
   runtime: python3.6
   region: us-east-1
-  timeout: 900
+  timeout: 30
 
 
 functions:
   hello:
     handler: handler.hello
+    events:
+      - http: GET hello
+          
     layers:
       - ${cf:selenium-layer-dev.SeleniumLayerExport}
       - ${cf:selenium-layer-dev.ChromedriverLayerExport}
