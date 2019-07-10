@@ -1,0 +1,22 @@
+service: youtube-transcript
+
+provider:
+  name: aws
+  runtime: python3.6
+  region: us-east-1
+  timeout: 900
+
+
+functions:
+  hello:
+    handler: handler.hello
+    layers:
+      - ${cf:selenium-layer-dev.SeleniumLayerExport}
+      - ${cf:selenium-layer-dev.ChromedriverLayerExport}
+
+plugins:
+  - serverless-python-requirements
+
+custom:
+  pythonRequirements:
+    dockerizePip: non-linux
